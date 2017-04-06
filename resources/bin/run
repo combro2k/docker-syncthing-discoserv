@@ -1,9 +1,9 @@
 #!/bin/bash
 
-chown discosrv:discosrv /var/discosrv -R
+chown stdiscosrv:stdiscosrv /var/stdiscosrv -R
 
-if [ ! -f /var/discosrv/key.pem ] && [ ! -f /var/discosrv/cert.pem ]; then
-	openssl req -nodes -new -x509 -keyout /var/discosrv/key.pem -out /var/discosrv/cert.pem -batch
+if [ ! -f /var/stdiscosrv/key.pem ] && [ ! -f /var/stdiscosrv/cert.pem ]; then
+	openssl req -nodes -new -x509 -keyout /var/stdiscosrv/key.pem -out /var/stdiscosrv/cert.pem -batch
 fi
 
-sudo -H -u discosrv /opt/discosrv/discosrv -key /var/discosrv/key.pem -cert /var/discosrv/cert.pem -listen 0.0.0.0:8443 -debug
+exec sudo -H -u stdiscosrv /opt/stdiscosrv/stdiscosrv -key /var/stdiscosrv/key.pem -cert /var/stdiscosrv/cert.pem -listen 0.0.0.0:8443 -debug
